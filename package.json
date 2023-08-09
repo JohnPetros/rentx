@@ -5,7 +5,7 @@
   "main": "./src/server.ts",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
+    "typeorm": "typeorm-ts-node-commonjs -d ./src/database",
     "migration:create": "ts-node ./migration.ts"
   },
   "keywords": [],
