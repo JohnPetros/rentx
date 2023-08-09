@@ -1,15 +1,15 @@
 import { Column, CreateDateColumn, Entity, PrimaryColumn } from 'typeorm'
 import { v4 as uuid } from 'uuid'
 
-@Entity('categoris')
+@Entity('categories')
 export class Category {
-  @PrimaryColumn()
+  @PrimaryColumn('uuid')
   id?: string
 
-  @Column()
+  @Column('text')
   name: string
 
-  @Column()
+  @Column('text')
   description: string
 
   @CreateDateColumn()
