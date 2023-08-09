@@ -11,16 +11,17 @@ export class CategoriesRepository implements ICategoriesRepository {
   }
 
   async create({ description, name }) {
-    const category = await this.repository.create({
+    const category = this.repository.create({
       description,
-      name,
+     ait this.repository.save(category)
+  } name,
     })
 
-    await this.repository.save(category)
-  }
+    aw
 
   async list() {
-    return await this.repository.find()
+    const categories = await this.repository.find()
+    return categories
   }
 
   async findByName(name: string) {
