@@ -4,6 +4,7 @@ import swaggerConfig from './swagger.json'
 
 import 'reflect-metadata'
 import './database'
+import './shared/container'
 
 import { router } from './routes'
 

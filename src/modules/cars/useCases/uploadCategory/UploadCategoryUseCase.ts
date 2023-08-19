@@ -1,5 +1,6 @@
 import fs from 'fs'
 import { parse } from 'csv-parse'
+import { inject, injectable } from 'tsyringe'
 import { ICategoriesRepository } from '@modules/cars/repositories/ICategoriesRepository'
 
 interface IUploadCategory {
@@ -7,8 +8,12 @@ interface IUploadCategory {
   description: string
 }
 
+@injectable()
 export class UploadCategoryUseCase {
-  constructor(private categoriesRepository: ICategoriesRepository) {}
+  constructor(
+    @inject('CategoriesRepository')
+    private categoriesRepository: ICategoriesRepository
+  ) {}
 
   loadCategories(file: Express.Multer.File): Promise<IUploadCategory[]> {
     return new Promise((resolve, reject) => {
@@ -36,12 +41,6 @@ export class UploadCategoryUseCase {
           reject(error)
         })
     })
-
-    setTimeout(() => {
-      console.log('log 1')
-    }, 0)
-
-    console.log('log 2')
   }
 
   async execute(file: Express.Multer.File) {

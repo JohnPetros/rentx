@@ -1,14 +1,18 @@
-import { SpecificationsRepository } from '@modules/cars/repositories/implementations/SpecificationsRepository'
+import { injectable, inject } from 'tsyringe'
+import { ISpecificationsRepository } from '@modules/cars/repositories/ISpecificationsRepository'
 
 interface IRequest {
   name: string
   description: string
 }
 
+@injectable()
 export class CreateSpecificationUseCase {
-  constructor(private specificationsRepository: SpecificationsRepository) {}
+  constructor(
+  @inject('SpecificationsRepository')
+    private specificationsRepository: ISpecificationsRepository) {}
 
-  execute({ name, description }: IRequest) {
+  async execute({ name, description }: IRequest) {
     const categoryAldearyExists = this.specificationsRepository.findByName(name)
 
     if (categoryAldearyExists) {

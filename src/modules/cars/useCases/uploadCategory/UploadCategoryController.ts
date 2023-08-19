@@ -1,13 +1,15 @@
+import { container } from 'tsyringe'
 import { UploadCategoryUseCase } from './UploadCategoryUseCase'
 import { Request, Response } from 'express'
 
 export class UploadCategoryController {
-  constructor(private uploadCategoryUseCase: UploadCategoryUseCase) {}
 
-  handle(request: Request, response: Response) {
+  async handle(request: Request, response: Response) {
     const { file } = request
 
-    this.uploadCategoryUseCase.execute(file)
+    const uploadCategoryUseCase = container.resolve(UploadCategoryUseCase)
+
+    await uploadCategoryUseCase.execute(file)
 
     return response.json()
   }
