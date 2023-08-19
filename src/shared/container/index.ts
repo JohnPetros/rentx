@@ -6,7 +6,7 @@ import { CategoriesRepository } from '@modules/cars/repositories/implementations
 import { ISpecificationsRepository } from '@modules/cars/repositories/ISpecificationsRepository'
 import { SpecificationsRepository } from '@modules/cars/repositories/implementations/SpecificationsRepository'
 
-import { IUsersRepository } from '@modules/accounts/repositories/UsersRepository'
+import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository'
 import { UsersRepository } from '@modules/accounts/repositories/implementations/UsersRepository'
 
 container.registerSingleton<ICategoriesRepository>(
