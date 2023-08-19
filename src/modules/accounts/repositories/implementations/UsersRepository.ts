@@ -2,7 +2,7 @@ import { Repository } from 'typeorm'
 import { AppDataSource } from 'database'
 
 import { ICreateUserDTO } from '../../dtos/ICreateUSerDTO'
-import { IUsersRepository } from '../UsersRepository'
+import { IUsersRepository } from '../IUsersRepository'
 import { User } from '../../entities/User'
 
 export class UsersRepository implements IUsersRepository {
