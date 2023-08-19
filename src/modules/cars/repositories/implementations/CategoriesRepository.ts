@@ -25,6 +25,6 @@ export class CategoriesRepository implements ICategoriesRepository {
   }
 
   async findByName(name: string) {
-    return this.repository.findOne({ where: { name } })
+    return await this.repository.findOne({ where: { name } })
   }
 }

@@ -45,13 +45,12 @@ export class UploadCategoryUseCase {
 
   async execute(file: Express.Multer.File) {
     const categories = await this.loadCategories(file)
-    console.log(categories)
 
-    categories.map(({ name, description }) => {
-      const existCategory = this.categoriesRepository.findByName(name)
+    categories.map(async ({ name, description }) => {
+      const existCategory = await this.categoriesRepository.findByName(name)
 
       if (!existCategory) {
-        this.categoriesRepository.create({
+        await this.categoriesRepository.create({
           name,
           description,
         })

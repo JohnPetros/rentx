@@ -11,6 +11,6 @@ export class UploadCategoryController {
 
     await uploadCategoryUseCase.execute(file)
 
-    return response.json()
+    return response.status(201).json()
   }
 }
