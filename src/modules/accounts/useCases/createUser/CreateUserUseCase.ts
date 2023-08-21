@@ -4,6 +4,7 @@ import { ICreateUserDTO } from '@modules/accounts/dtos/ICreateUSerDTO'
 import { IUsersRepository } from '@modules/accounts/repositories/IUsersRepository'
 
 import { hash } from 'bcrypt'
+import { AppError } from '@errors/AppError'
 
 @injectable()
 export class CreateUserUseCase {
@@ -22,7 +23,7 @@ export class CreateUserUseCase {
     const userAlreadyExist = await this.usersRepository.findByEmail(email)
 
     if (userAlreadyExist) {
-      throw new Error("User already exists")
+      throw new AppError("User already exists")
     }
 
     const passwordHash = await hash(password, 8)
