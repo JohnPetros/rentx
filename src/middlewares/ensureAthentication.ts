@@ -27,6 +27,10 @@ export async function ensureAuthentication(
       throw new AppError('User does not exist', 401)
     }
 
+    request.user = {
+      id: String(userId)
+    }
+
     next()
   } catch (error) {
     console.error(error)
