@@ -18,6 +18,9 @@ export class User {
   @Column('text')
   driver_license: string
 
+  @Column('text')
+  avatar: string
+
   @CreateDateColumn()
   created_at: Date
 
