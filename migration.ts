@@ -1,6 +1,6 @@
 import { exec } from 'child_process';
 
-const command = `npm run typeorm migration:create ./src/database/migrations/${process.argv[2]}`;
+const command = `npm run typeorm migration:create ./src/shared/typeorm/migrations/${process.argv[2]}`;
 
 (() => exec(command, (error, stdout, stderr) => {
   if (error !== null) {
