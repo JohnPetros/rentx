@@ -1,6 +1,5 @@
 import { DataSource } from 'typeorm'
 
-
 export const AppDataSource = new DataSource({
   type: 'postgres',
   host: 'localhost',
@@ -8,7 +7,7 @@ export const AppDataSource = new DataSource({
   username: 'docker',
   password: 'ignite',
   database: 'rentx',
-  migrations: ['./src/database/migrations/*.ts'],
+  migrations: ['./src/shared/infra/typeorm/migrations/*.ts'],
   entities: ['./src/modules/**/entities/*.ts']
 })
 
