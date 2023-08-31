@@ -21,11 +21,13 @@ export async function ensureAuthentication(
     const { sub: userId } = verify(token, '3f388a638143f3b6aa1e36a4bf8cd17c')
 
     const usersRepository = new UsersRepository()
-    const user = usersRepository.findById(String(userId))
+    const user = await usersRepository.findById(String(userId))
 
     if (!user) {
       throw new AppError('User does not exist', 401)
     }
+
+    console.log({ user })
 
     request.user = {
       id: String(userId),
