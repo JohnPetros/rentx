@@ -1,6 +1,8 @@
-import { DataSource } from 'typeorm'
+import { DataSource, DataSourceOptions } from 'typeorm'
+import { SeederOptions } from 'typeorm-extension'
+import { MainSeeder } from './seeds/MainSeeder'
 
-export const AppDataSource = new DataSource({
+const options: DataSourceOptions & SeederOptions = {
   type: 'postgres',
   host: 'localhost',
   port: 5432,
@@ -8,8 +10,11 @@ export const AppDataSource = new DataSource({
   password: 'ignite',
   database: 'rentx',
   migrations: ['./src/shared/infra/typeorm/migrations/*.ts'],
-  entities: ['./src/modules/**/entities/*.ts']
-})
+  entities: ['./src/modules/**/entities/*.ts'],
+  seeds: [MainSeeder]
+}
+
+export const AppDataSource = new DataSource(options)
 
 AppDataSource.initialize()
   .then(() => {
