@@ -7,8 +7,8 @@
     "dev": "tsx watch src/shared/infra/http/server.ts",
     "create": "typeorm migration:create ./src/shared/infra/typeorm/migrations/learningMigration",
     "generate": "typeorm migration:generate -n PostRefactoring",
-    "migrate": "npx typeorm-ts-node-commonjs migration:run -d ./src/shared/infra/typeorm/index.ts",
-    "revert": "npx typeorm-ts-node-commonjs migration:revert -d ./src/shared/infra/typeorm/index.ts",
+    "migrate": "npx typeorm-ts-node-commonjs migration:run -d ./src/shared/infra/typeorm/",
+    "revert": "npx typeorm-ts-node-commonjs migration:revert -d ./src/shared/infra/typeorm/",
     "seed": "ts-node ./node_modules/typeorm-extension/bin/cli.cjs seed:run -d ./src/shared/infra/typeorm/index.ts",
     "test": "jest"
   },
