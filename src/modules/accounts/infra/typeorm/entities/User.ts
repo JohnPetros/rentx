@@ -3,23 +3,26 @@ import { v4 as uuid } from 'uuid'
 
 @Entity('users')
 export class User {
-  @PrimaryColumn('uuid')
+  @PrimaryColumn({ type: 'uuid' })
   id?: string
 
-  @Column('text')
+  @Column({ type: 'text', unique: true })
   name: string
 
-  @Column('text')
+  @Column({ type: 'text', unique: true })
   email: string
 
-  @Column('text')
+  @Column({ type: 'text' })
   password: string
 
-  @Column('text')
+  @Column({ type: 'text' })
   driver_license: string
 
-  @Column('text')
+  @Column({ type: 'text' })
   avatar: string
+
+  @Column({ type: 'text', default: false })
+  is_admin: boolean
 
   @CreateDateColumn()
   created_at: Date
@@ -27,7 +30,7 @@ export class User {
   constructor() {
     if (!this.id) {
       this.id = uuid()
+      this.is_admin = false
     }
   }
 }
-
