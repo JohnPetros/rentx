@@ -5,8 +5,10 @@
   "main": "./src/server.ts",
   "scripts": {
     "dev": "tsx watch src/shared/infra/http/server.ts",
-    "typeorm": "typeorm-ts-node-commonjs -d ./src/shared/infra/typeorm",
-    "migration:create": "npx typeorm migration:create ./src/database/migrations",
+    "create": "typeorm migration:create ./src/shared/infra/typeorm/migrations/learningMigration",
+    "generate": "typeorm migration:generate -n PostRefactoring",
+    "migrate": "npx typeorm-ts-node-commonjs migration:run -d ./src/shared/infra/typeorm/",
+    "revert": "npx typeorm-ts-node-commonjs migration:revert -d ./src/shared/infra/typeorm/",
     "test": "jest"
   },
   "keywords": [],
