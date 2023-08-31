@@ -23,6 +23,7 @@ export class CreateUsers1692457584673 implements MigrationInterface {
           {
             name: 'email',
             type: 'text',
+            isUnique: true,
           },
           {
             name: 'password',
@@ -34,7 +35,7 @@ export class CreateUsers1692457584673 implements MigrationInterface {
           },
           {
             name: 'is_admin',
-            type: 'text',
+            type: 'boolean',
             default: false,
           },
           {

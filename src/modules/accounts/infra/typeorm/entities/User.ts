@@ -21,7 +21,7 @@ export class User {
   @Column({ type: 'text' })
   avatar: string
 
-  @Column({ type: 'text', default: false })
+  @Column({ type: 'boolean', default: false })
   is_admin: boolean
 
   @CreateDateColumn()
