@@ -1,6 +1,6 @@
 import { Repository } from 'typeorm'
-import { Category } from '../../infra/typeorm/entities/Category'
-import { ICategoriesRepository } from '../ICategoriesRepository'
+import { Category } from '../entities/Category'
+import { ICategoriesRepository } from '../../../repositories/ICategoriesRepository'
 import { AppDataSource } from '@shared/infra/typeorm'
 
 export class CategoriesRepository implements ICategoriesRepository {

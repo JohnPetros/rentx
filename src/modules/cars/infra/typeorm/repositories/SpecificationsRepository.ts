@@ -1,7 +1,7 @@
 import { Repository } from 'typeorm'
 import { AppDataSource } from '@shared/infra/typeorm'
 
-import { Specification } from '../../infra/typeorm/entities/Specification'
+import { Specification } from '../entities/Specification'
 import {
   ICreateServiceDTO,
   ISpecificationsRepository,
