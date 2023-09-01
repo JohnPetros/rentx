@@ -1,3 +1,5 @@
+import { Specification } from "../infra/typeorm/entities/Specification"
+
 export interface ICrateCarDTO {
   name: string
   description: string
@@ -6,4 +8,6 @@ export interface ICrateCarDTO {
   brand: string
   fine_amount: number
   category_id: string
+  specifications?: Specification[]
+  id?: string
 }
