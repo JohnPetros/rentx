@@ -1,4 +1,4 @@
-import { ICrateCarDTO } from '@modules/cars/dtos/ICreateCarsDTO'
+import { ICrateCarDTO } from '@modules/cars/dtos/ICreateCarDTO'
 import { Car } from '@modules/cars/infra/typeorm/entities/Car'
 import { ICarsRepository } from '../../../repositories/ICarsRepository'
 import { Repository } from 'typeorm'
@@ -19,6 +19,8 @@ export class CarsRepository implements ICarsRepository {
     brand,
     fine_amount,
     category_id,
+    specifications,
+    id,
   }: ICrateCarDTO): Promise<Car> {
     const car = this.repository.create({
       name,
@@ -28,6 +30,8 @@ export class CarsRepository implements ICarsRepository {
       brand,
       fine_amount,
       category_id,
+      specifications,
+      id,
     })
 
     await this.repository.save(car)
@@ -50,8 +54,8 @@ export class CarsRepository implements ICarsRepository {
 
     if (brand) {
       carsQuery.andWhere('c.brand = :brand', { brand })
-    }    
-    
+    }
+
     if (category_id) {
       carsQuery.andWhere('c.category_id = :category_id', { category_id })
     }
@@ -61,5 +65,9 @@ export class CarsRepository implements ICarsRepository {
     }
 
     return await carsQuery.getMany()
+  }
+
+  async findById(id: string): Promise<Car> {
+    return await this.repository.findOne({ where: { id } })
   }
 }
