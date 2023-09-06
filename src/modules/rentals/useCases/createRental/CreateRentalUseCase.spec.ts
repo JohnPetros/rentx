@@ -2,10 +2,14 @@ import { RentalsRepositoryInMemory } from '@modules/rentals/repositories/in-memo
 import { CreateRentalUseCase } from './CreateRentalUseCase'
 import { AppError } from '@shared/errors/AppError'
 
+import dayjs from 'dayjs'
+
 let createRentalUseCase = null
 let rentalsRepositoryInMemory = null
 
 describe('Create Rental', () => {
+  const dayAfter24Hours = dayjs().add(1, 'day').toDate()
+
   beforeEach(() => {
     rentalsRepositoryInMemory = new RentalsRepositoryInMemory()
     createRentalUseCase = new CreateRentalUseCase(rentalsRepositoryInMemory)
@@ -15,7 +19,7 @@ describe('Create Rental', () => {
     const createdRental = await createRentalUseCase.execute({
       user_id: '12345',
       car_id: '12345',
-      expected_return_date: new Date(),
+      expected_return_date: dayAfter24Hours,
     })
 
     expect(createdRental).toHaveProperty('user_id', createdRental.user_id)
@@ -31,12 +35,12 @@ describe('Create Rental', () => {
       await createRentalUseCase.execute({
         user_id: '424242',
         car_id: '54321',
-        expected_return_date: new Date(),
+        expected_return_date: dayAfter24Hours,
       })
       await createRentalUseCase.execute({
         user_id: '424242',
         car_id: '654321',
-        expected_return_date: new Date(),
+        expected_return_date: dayAfter24Hours,
       })
     }).rejects.toBeInstanceOf(AppError)
   })
@@ -46,12 +50,22 @@ describe('Create Rental', () => {
       await createRentalUseCase.execute({
         user_id: '123456',
         car_id: '424242',
-        expected_return_date: new Date(),
+        expected_return_date: dayAfter24Hours,
       })
       await createRentalUseCase.execute({
         user_id: '654321',
         car_id: '424242',
-        expected_return_date: new Date(),
+        expected_return_date: dayAfter24Hours,
+      })
+    }).rejects.toBeInstanceOf(AppError)
+  })
+
+  it('should not be able to create a new rental whit a invalid expected return date', async () => {
+    expect(async () => {
+      await createRentalUseCase.execute({
+        user_id: '123456',
+        car_id: '424242',
+        expected_return_date: dayjs().toDate(),
       })
     }).rejects.toBeInstanceOf(AppError)
   })
