@@ -1,9 +1,9 @@
 import { Repository } from 'typeorm'
-import { ICarsImageRepository } from '@modules/cars/repositories/ICarsImageRepository'
+import { ICarsImagesRepository } from '@modules/cars/repositories/ICarsImagesRepository'
 import { CarImage } from '../entities/CarImage'
 import { AppDataSource } from '@shared/infra/typeorm'
 
-export class CarsImageRepository implements ICarsImageRepository {
+export class CarsImagesRepository implements ICarsImagesRepository {
   private repository: Repository<CarImage>
 
   constructor() {
@@ -16,6 +16,8 @@ export class CarsImageRepository implements ICarsImageRepository {
       image_name,
     })
 
+    console.log(carImage);
+    
     await this.repository.save(carImage)
 
     return carImage
