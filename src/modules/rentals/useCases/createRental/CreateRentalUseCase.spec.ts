@@ -1,25 +1,31 @@
 import { RentalsRepositoryInMemory } from '@modules/rentals/repositories/in-memory/RentalsRepositoryInMemory'
 import { CreateRentalUseCase } from './CreateRentalUseCase'
+
 import { AppError } from '@shared/errors/AppError'
+import { DateProvider } from '@shared/providers/dateProvider/implementations/DateProvider'
 
-import dayjs from 'dayjs'
-
-let createRentalUseCase = null
 let rentalsRepositoryInMemory = null
+let dateProvider = null
+let createRentalUseCase = null
+let currentAfter24Hours = null
 
 describe('Create Rental', () => {
-  const dayAfter24Hours = dayjs().add(1, 'day').toDate()
-
   beforeEach(() => {
     rentalsRepositoryInMemory = new RentalsRepositoryInMemory()
-    createRentalUseCase = new CreateRentalUseCase(rentalsRepositoryInMemory)
+    dateProvider = new DateProvider()
+    createRentalUseCase = new CreateRentalUseCase(
+      rentalsRepositoryInMemory,
+      dateProvider
+    )
+
+    currentAfter24Hours = dateProvider.getCurrentDayAfter24Hors()
   })
 
   it('should be able to create a new rental', async () => {
     const createdRental = await createRentalUseCase.execute({
       user_id: '12345',
       car_id: '12345',
-      expected_return_date: dayAfter24Hours,
+      expected_return_date: currentAfter24Hours,
     })
 
     expect(createdRental).toHaveProperty('user_id', createdRental.user_id)
@@ -35,12 +41,12 @@ describe('Create Rental', () => {
       await createRentalUseCase.execute({
         user_id: '424242',
         car_id: '54321',
-        expected_return_date: dayAfter24Hours,
+        expected_return_date: currentAfter24Hours,
       })
       await createRentalUseCase.execute({
         user_id: '424242',
         car_id: '654321',
-        expected_return_date: dayAfter24Hours,
+        expected_return_date: currentAfter24Hours,
       })
     }).rejects.toBeInstanceOf(AppError)
   })
@@ -50,12 +56,12 @@ describe('Create Rental', () => {
       await createRentalUseCase.execute({
         user_id: '123456',
         car_id: '424242',
-        expected_return_date: dayAfter24Hours,
+        expected_return_date: currentAfter24Hours,
       })
       await createRentalUseCase.execute({
         user_id: '654321',
         car_id: '424242',
-        expected_return_date: dayAfter24Hours,
+        expected_return_date: currentAfter24Hours,
       })
     }).rejects.toBeInstanceOf(AppError)
   })
@@ -65,7 +71,7 @@ describe('Create Rental', () => {
       await createRentalUseCase.execute({
         user_id: '123456',
         car_id: '424242',
-        expected_return_date: dayjs().toDate(),
+        expected_return_date: dateProvider.getCurrentDate(),
       })
     }).rejects.toBeInstanceOf(AppError)
   })
