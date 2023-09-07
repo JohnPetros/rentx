@@ -21,14 +21,14 @@ O desenvolvimento da aplicação se sustenta com base nos princípios da arquite
 
 ## Cadastro de Carro
 
-### Requisitos Funcionais 
+### Requisitos Funcionais
 
 - Deve ser possível cadastrar um novo carro.
 
 ### Regras de Negócio
 
 - Não deve ser possível cadastrar um carro com uma placa já existente.
-- Não deve ser possível cadastrar um carro se o usuário não for administrador *.
+- Não deve ser possível cadastrar um carro se o usuário não for administrador \*.
 - Deve se cadastrar um carro com disponibilidade por padrão.
 
 ## Listagem de Carros
@@ -90,15 +90,15 @@ O desenvolvimento da aplicação se sustenta com base nos princípios da arquite
 
 # Tecnologias
 
- - NodeJS
- - Typescript
- - Express
- - ts-node-dev
- - yarn
- - TypeORM
- - Docker
- - eslint
- - prettier
+- NodeJS
+- Typescript
+- Express
+- ts-node-dev
+- yarn
+- TypeORM
+- Docker
+- eslint
+- prettier
 
  <br>
 
@@ -121,10 +121,9 @@ $ docker-compose up
 
 # Rotas
 
-
 ## `GET /categories`
 
-Retorna todas as categorias armazenadas no banco de dados se um usuário válido e com  atribuições de administrador está fazendo a solicitação.
+Retorna todas as categorias armazenadas no banco de dados se um usuário válido e com atribuições de administrador está fazendo a solicitação.
 
 ## `POST /categories`
 
@@ -132,17 +131,18 @@ Cria uma nova categoria, recebendo o `name` e a `description` dela no corpo da r
 
 ```json
 {
-    "name": "Nome da Categoria",
-    "description": "Descrição da Categoria"
+  "name": "Nome da Categoria",
+  "description": "Descrição da Categoria"
 }
 ```
 
 ## `POST /categories/import`
 
 Cria novas categorias com base em um aquivo _.csv_, com os atributos de `name` e `description`. O caminho do arquivo é passado no corpo da requisição e a as categorias são criadas desde que não seja um `name` já existente.
+
 ## `GET /specification`
 
-Retorna todas as especificações armazenadas no banco de dados se um usuário válido e com  atribuições de administrador está fazendo a solicitação.
+Retorna todas as especificações armazenadas no banco de dados se um usuário válido e com atribuições de administrador está fazendo a solicitação.
 
 ## `POST /specification`
 
@@ -150,7 +150,7 @@ Cria uma nova especificação, recebendo o `name` e a `description` dela no corp
 
 ```json
 {
-    "name": "Nome da Especificação",
-    "description": "Descrição da Especificação"
+  "name": "Nome da Especificação",
+  "description": "Descrição da Especificação"
 }
 ```
